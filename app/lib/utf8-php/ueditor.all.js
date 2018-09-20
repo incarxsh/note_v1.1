@@ -4,7 +4,14 @@
  * build: Wed Aug 10 2016 11:06:02 GMT+0800 (CST)
  */
 
-(function(){
+(function (AV){
+    var APP_ID = 'VjGAoyLEOUXGeNS805hWtpSB-gzGzoHsz';
+    var APP_KEY = 'o0hVP6cRGPFn9pzy5BK4YCFf';
+
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
 
 // editor.js
 UEDITOR_CONFIG = window.UEDITOR_CONFIG || {};
@@ -8108,7 +8115,7 @@ UE.Editor.defaultOptions = function(editor){
         });
 
         function showErrorMsg(msg) {
-            console && console.error(msg);
+            // console && console.error(msg);
             //me.fireEvent('showMessage', {
             //    'title': msg,
             //    'type': 'error'
@@ -23797,10 +23804,10 @@ UE.plugin.register('autoupload', function (){
         me.execCommand('inserthtml', loadingHtml);
 
         /* 判断后端配置是否没有加载成功 */
-        if (!me.getOpt(filetype + 'ActionName')) {
-            errorHandler(me.getLang('autoupload.errorLoadConfig'));
-            return;
-        }
+        // if (!me.getOpt(filetype + 'ActionName')) {
+        //     errorHandler(me.getLang('autoupload.errorLoadConfig'));
+        //     return;
+        // }
         /* 判断文件大小是否超出限制 */
         if(file.size > maxSize) {
             errorHandler(me.getLang('autoupload.exceedSizeError'));
@@ -23812,6 +23819,32 @@ UE.plugin.register('autoupload', function (){
             errorHandler(me.getLang('autoupload.exceedTypeError'));
             return;
         }
+
+        console.log(file);
+
+        var name = 'avatar.jpg';
+
+        var file1 = AV.File.withURL('Satomi_Ishihara.gif', 'http://ww3.sinaimg.cn/bmiddle/596b0666gw1ed70eavm5tg20bq06m7wi.gif');
+        var todo = new AV.Object('Todo');
+        todo.set('girl', file);
+        todo.set('topic', '明星');
+        console.log("mm");
+        todo.save().then(function(res){
+            console.log(res.url());
+        },function(error){
+            console.log(error);
+        });
+
+        // var file1 = new AV.File(name, file);
+        // file1.save().then(function (file) {
+        //     // 文件保存成功
+        //     console.log(file.url());
+        // }, function (error) {
+        //     // 异常处理
+        //     console.log(error);
+        // });
+
+        return;
 
         /* 创建Ajax并提交 */
         var xhr = new XMLHttpRequest(),
@@ -24553,10 +24586,10 @@ UE.plugin.register('simpleupload', function (){
                 }
 
                 /* 判断后端配置是否没有加载成功 */
-                if (!me.getOpt('imageActionName')) {
-                    errorHandler(me.getLang('autoupload.errorLoadConfig'));
-                    return;
-                }
+                // if (!me.getOpt('imageActionName')) {
+                //     errorHandler(me.getLang('autoupload.errorLoadConfig'));
+                //     return;
+                // }
                 // 判断文件格式是否错误
                 var filename = input.value,
                     fileext = filename ? filename.substr(filename.lastIndexOf('.')):'';
@@ -29565,4 +29598,4 @@ UE.registerUI('autosave', function(editor) {
 
 
 
-})();
+})(AV);

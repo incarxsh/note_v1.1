@@ -1,10 +1,10 @@
 {
-  "name": "01_helloworld",
+  "name": "note_v1.1s",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "webpack-dev-server --content-base ./ --port 8080",
+    "dev": "webpack-dev-server --content-base ./ --port 8080",
     "build":"webpack"
   },
   "author": "",
@@ -26,6 +26,8 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "leancloud-realtime": "^4.2.0",
+    "leancloud-storage": "^3.10.0"
   }
 }
